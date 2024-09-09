@@ -29,10 +29,12 @@ const App = () => {
       >
         Preview Form
       </button>
-      <div className="mt-8">
-        <h2 className="text-xl font-semibold mb-4">Form Preview:</h2>
-        <DynamicJsonForm formConfig={formConfig} />
-      </div>
+      {formConfig.fields.length > 0 && (
+        <div className="mt-8">
+          <h2 className="text-xl font-semibold mb-4">Form Preview:</h2>
+          <DynamicJsonForm formConfig={formConfig} />
+        </div>
+      )}
     </div>
   );
 };
