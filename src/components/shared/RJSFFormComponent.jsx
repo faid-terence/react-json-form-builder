@@ -219,12 +219,12 @@ const DynamicJsonForm = ({ formConfig }) => {
         </div>
       ))}
       <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-        <Button
+        {/* <Button
           type="submit"
           className="mt-6 bg-blue-600 text-white hover:bg-blue-700 rounded-md shadow-md w-full py-3 text-lg font-semibold transition-all duration-200"
         >
           Submit
-        </Button>
+        </Button> */}
       </motion.div>
     </motion.form>
   );
