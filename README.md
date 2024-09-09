@@ -54,60 +54,132 @@ To set up this project locally, follow these steps:
 
    - The JSON should follow a specific structure to generate the form correctly.
    - Here's a basic example of the JSON structure:
+  
+   ```
 
-     ```json
-     {
-       "fields": [
-         {
-      key: "DOCUMENT_TYPE",
-      type: "custom-select",
-      className: "col-span-1",
-      templateOptions: {
-        label: "Identification document type",
-        options: [
-          {
-            name: "Rwanda National ID",
-            value: "RWANDA_NATIONAL_ID",
-          },
-          {
-            name: "Passport",
-            value: "PASSPORT",
-          },
-          {
-            name: "NPR Application Number",
-            value: "NPR_APPLICATION_NUMBER",
-          },
-        ],
-        required: true,
-        placeholder: "Select document type",
-        summarySection: "NEW_IDENTIFICATION_NUMBER",
-        summaryFormatting: {
-          useLabel: "Identification document type",
-          formatType: "STANDARD_OPTIONS",
-        },
+    { "fields": [
+      {
+        "key": "APPLICANT_FULL_NAME",
+        "type": "custom-input",
+        "className": "col-span-1",
+        "templateOptions": {
+          "type": "text",
+          "required": true,
+          "label": "Full Name",
+          "placeholder": "Enter your full name",
+          "summarySection": "PERSONAL_DETAILS"
+        }
       },
-         {
-      key: "GENDER",
-      type: "custom-radio",
-      className: "col-span-1",
-      templateOptions: {
-        label: "Gender",
-        options: [
-          {
-            name: "Male",
-            value: "MALE",
-          },
-          {
-            name: "Female",
-            value: "FEMALE",
-          },
-        ],
-        required: true,
-        summarySection: "NEW_IDENTIFICATION_NUMBER",
+      {
+        "key": "POSITION_APPLIED",
+        "type": "custom-select",
+        "className": "col-span-1",
+        "templateOptions": {
+          "label": "Position Applied For",
+          "options": [
+            { "name": "Software Engineer", "value": "SOFTWARE_ENGINEER" },
+            { "name": "Product Manager", "value": "PRODUCT_MANAGER" },
+            { "name": "UI/UX Designer", "value": "UI_UX_DESIGNER" }
+          ],
+          "required": true,
+          "placeholder": "Select the position",
+          "summarySection": "JOB_DETAILS"
+        }
       },
-       ]
-     }
-     ```
+      {
+        "key": "YEARS_OF_EXPERIENCE",
+        "type": "custom-input",
+        "className": "col-span-1",
+        "templateOptions": {
+          "type": "number",
+          "required": true,
+          "label": "Years of Experience",
+          "placeholder": "Enter years of experience",
+          "summarySection": "JOB_DETAILS"
+        }
+      },
+      {
+        "key": "HIGHEST_EDUCATION",
+        "type": "custom-select",
+        "className": "col-span-1",
+        "templateOptions": {
+          "label": "Highest Level of Education",
+          "options": [
+            { "name": "High School", "value": "HIGH_SCHOOL" },
+            { "name": "Bachelor's Degree", "value": "BACHELORS" },
+            { "name": "Master's Degree", "value": "MASTERS" },
+            { "name": "Ph.D.", "value": "PHD" }
+          ],
+          "required": true,
+          "placeholder": "Select your education level",
+          "summarySection": "EDUCATION_DETAILS"
+        }
+      },
+      {
+        "key": "LINKEDIN_PROFILE",
+        "type": "custom-input",
+        "className": "col-span-1",
+        "templateOptions": {
+          "type": "url",
+          "label": "LinkedIn Profile",
+          "placeholder": "Enter LinkedIn profile URL",
+          "summarySection": "CONTACT_DETAILS"
+        }
+      },
+      {
+        "key": "PORTFOLIO_LINK",
+        "type": "custom-input",
+        "className": "col-span-1",
+        "templateOptions": {
+          "type": "url",
+          "label": "Portfolio Website",
+          "placeholder": "Enter portfolio website URL",
+          "summarySection": "CONTACT_DETAILS"
+        }
+      },
+      {
+        "key": "COVER_LETTER",
+        "type": "custom-input",
+        "className": "col-span-2",
+        "templateOptions": {
+          "label": "Cover Letter",
+          "placeholder": "Write a short cover letter",
+          "rows": 5,
+          "required": true,
+          "summarySection": "JOB_APPLICATION_DETAILS"
+        }
+      },
+      {
+        "key": "AVAILABILITY_DATE",
+        "type": "custom-date",
+        "className": "col-span-1",
+        "templateOptions": {
+          "label": "Available Start Date",
+          "required": true,
+          "placeholder": "Select availability date",
+          "summarySection": "JOB_APPLICATION_DETAILS",
+          "summaryFormatting": {
+            "dateFormat": "MM/DD/YYYY",
+            "formatType": "DATE"
+          }
+        }
+      },
+      {
+        "key": "GENDER",
+        "type": "custom-radio",
+        "className": "col-span-1",
+        "templateOptions": {
+          "label": "Gender",
+          "options": [
+            { "name": "Male", "value": "MALE" },
+            { "name": "Female", "value": "FEMALE" },
+            { "name": "Other", "value": "OTHER" }
+          ],
+          "required": true,
+          "summarySection": "PERSONAL_DETAILS"
+        }
+      }
+    ]
 
 ## Components
 
