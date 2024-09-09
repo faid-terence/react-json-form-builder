@@ -172,6 +172,26 @@ const DynamicJsonForm = ({ formConfig }) => {
               </Popover>
             </div>
           );
+
+        case "custom-textarea":
+          return (
+            <div className="flex flex-col w-full">
+              <Label
+                htmlFor={key}
+                className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+              >
+                {label}
+              </Label>
+              <textarea
+                id={key}
+                value={formData[key] || ""}
+                onChange={(e) => handleInputChange(key, e.target.value)}
+                placeholder={placeholder}
+                required={required}
+                className="rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 transition-all duration-200 shadow-sm"
+              />
+            </div>
+          );
         default:
           return null;
       }
