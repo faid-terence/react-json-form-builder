@@ -1,4 +1,3 @@
-
 import DynamicJsonForm from "./components/shared/RJSFFormComponent";
 
 const formConfig = {
@@ -10,7 +9,7 @@ const formConfig = {
       templateOptions: {
         type: "text",
         required: true,
-        label: "Tetstinfgagg",
+        label: "Applicant's last name",
         placeholder: "Enter last name",
         summarySection: "APPLICANT_DETAILS",
       },
@@ -121,7 +120,7 @@ const formConfig = {
 const App = () => {
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Irembo Applications</h1>
+      <h1 className="text-2xl font-bold mb-4 text-center">Application form </h1>
       <DynamicJsonForm formConfig={formConfig} />
     </div>
   );
