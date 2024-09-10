@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
+import { Textarea } from "@/components/ui/textarea";
 
 const DynamicJsonForm = ({ formConfig }) => {
   const [formData, setFormData] = useState({});
@@ -182,7 +183,28 @@ const DynamicJsonForm = ({ formConfig }) => {
               >
                 {label}
               </Label>
-              <textarea
+              <Textarea
+                id={key}
+                value={formData[key] || ""}
+                onChange={(e) => handleInputChange(key, e.target.value)}
+                placeholder={placeholder}
+                required={required}
+                className="rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 transition-all duration-200 shadow-sm"
+              />
+            </div>
+          );
+
+        case "file-upload":
+          return (
+            <div className="flex flex-col w-full">
+              <Label
+                htmlFor={key}
+                className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+              >
+                {label}
+              </Label>
+              <Input
+                type="file"
                 id={key}
                 value={formData[key] || ""}
                 onChange={(e) => handleInputChange(key, e.target.value)}
@@ -239,12 +261,12 @@ const DynamicJsonForm = ({ formConfig }) => {
         </div>
       ))}
       <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-        {/* <Button
+        <Button
           type="submit"
-          className="mt-6 bg-blue-600 text-white hover:bg-blue-700 rounded-md shadow-md w-full py-3 text-lg font-semibold transition-all duration-200"
+          className="mt-6 bg-primary text-white rounded-md shadow-md w-full py-3 text-lg font-semibold transition-all duration-200"
         >
           Submit
-        </Button> */}
+        </Button>
       </motion.div>
     </motion.form>
   );
