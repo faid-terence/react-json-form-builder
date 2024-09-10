@@ -34,10 +34,12 @@ const JsonEditorComponent = React.forwardRef((props, ref) => {
         const content = editorRef.current.get();
         if (content.json) {
           return JSON.stringify(content.json, null, 2);
-        } else if (content.text) {
+        }
+         else if (content.text) {
           return content.text;
         }
       }
+      
       return "";
     },
   }));
