@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -25,6 +25,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 const DynamicJsonForm = ({ formConfig }) => {
   const [formData, setFormData] = useState({});
+  const [visibleFields, setVisibleFields] = useState({});
 
   const handleInputChange = (fieldName, value) => {
     setFormData((prevData) => ({
@@ -33,9 +34,41 @@ const DynamicJsonForm = ({ formConfig }) => {
     }));
   };
 
+  useEffect(() => {
+    const evaluateHideExpressions = () => {
+      const newVisibleFields = {};
+      formConfig.fields.forEach((field) => {
+        if (field.hideExpression) {
+          try {
+            const hideFunc = new Function(
+              "formData",
+              `return ${field.hideExpression}`
+            );
+            newVisibleFields[field.key] = !hideFunc(formData);
+          } catch (error) {
+            console.error(
+              `Error evaluating hideExpression for field ${field.key}:`,
+              error
+            );
+            newVisibleFields[field.key] = true;
+          }
+        } else {
+          newVisibleFields[field.key] = true;
+        }
+      });
+      setVisibleFields(newVisibleFields);
+    };
+
+    evaluateHideExpressions();
+  }, [formData, formConfig.fields]);
+
   const renderField = (field) => {
     const { key, type, className, templateOptions } = field;
     const { label, required, placeholder, options } = templateOptions || field;
+
+    if (!visibleFields[key]) {
+      return null;
+    }
 
     const fieldContent = () => {
       switch (type) {
@@ -173,7 +206,6 @@ const DynamicJsonForm = ({ formConfig }) => {
               </Popover>
             </div>
           );
-
         case "custom-textarea":
           return (
             <div className="flex flex-col w-full">
@@ -193,7 +225,6 @@ const DynamicJsonForm = ({ formConfig }) => {
               />
             </div>
           );
-
         case "file-upload":
           return (
             <div className="flex flex-col w-full">
@@ -206,9 +237,7 @@ const DynamicJsonForm = ({ formConfig }) => {
               <Input
                 type="file"
                 id={key}
-                value={formData[key] || ""}
-                onChange={(e) => handleInputChange(key, e.target.value)}
-                placeholder={placeholder}
+                onChange={(e) => handleInputChange(key, e.target.files[0])}
                 required={required}
                 className="rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 transition-all duration-200 shadow-sm"
               />
