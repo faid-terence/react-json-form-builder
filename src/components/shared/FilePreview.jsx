@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
+import { Sheet, SheetContent } from "../ui/sheet";
 
 const FileUploadWithPreview = ({
   uploadKey,
@@ -48,11 +48,8 @@ const FileUploadWithPreview = ({
         )}
       </div>
 
-      {/* Preview Modal (Sheet) */}
+      {/* Preview Modal (Sheet) — opened programmatically, no trigger needed */}
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
-        <SheetTrigger asChild>
-          <div></div> {/* Trigger button is handled by Preview button */}
-        </SheetTrigger>
         <SheetContent side="bottom" className="p-6">
           <h2 className="text-lg font-bold mb-4">File Preview</h2>
           {selectedFile && (
